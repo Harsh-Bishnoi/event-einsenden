@@ -3,6 +3,14 @@ import CustomInput from './common/CustomInput'
 import { ArrowIcon } from '../utils/Icons'
 
 const Event = () => {
+    const [ImgPreview, setImgPreview] = useState([]);
+
+    const handleFileChange = (e) => {
+        const files = Array.from(e.target.files);
+        const objectUrls = files.map(file => URL.createObjectURL(file));
+        setImgPreview(prev => [...prev, ...objectUrls]);
+    };
+
     const initialValues = {
         Kategorie: "",
         titel: "",
@@ -25,7 +33,17 @@ const Event = () => {
                 <div className="max-w-[768px] mx-auto">
                     <h1 className='ff-open font-bold text-4xl leading-11 text-center text-[#222222] tracking-[-0.32px] pb-5'>Event einsenden</h1>
                     <p className='ff-open text-center font-light text-[20px] text-[#737376] leading-7.5 pb-5'>At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
-                    <form onSubmit={handelSubmit}>
+                    <div className="w-full mx-auto max-w-[360px] sm:max-w-[620px] md:max-w-[763px] px-2 py-4 bg-white border border-dashed border-[#D1E0E9] rounded-[30px]">
+                        <input className='file:border file:border-[#D4D4D4] file:border-dashed file:max-w-[96px] file:w-full file:min-h-[80px] file:bg-white file:rounded-[20px]' type="file" accept='image/*' onChange={handleFileChange} multiple />
+                        {ImgPreview.length > 0 && (
+                            <div className='gap-4 flex overflow-x-scroll'>
+                                {ImgPreview.map((imgSrc, index) => (
+                                    <img key={index} src={imgSrc} alt={`Preview ${index}`} className='max-w-[96px] max-h-[96px] w-full h-full rounded-[20px]' />
+                                ))}
+                            </div>
+                        )}
+                    </div>
+                    <form className='mt-5' onSubmit={handelSubmit}>
                         <div className="flex max-w-[763px] border-[0.5px] w-full border-[#D1E0E9] rounded-[30px] px-4 bg-white mb-5 py-[15.5px] relative">
                             <select
                                 value={inputValue.Kategorie}
