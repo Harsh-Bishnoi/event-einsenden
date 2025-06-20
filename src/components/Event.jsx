@@ -17,7 +17,6 @@ const Event = () => {
         setImgPreview(updated);
     };
 
-
     const initialValues = {
         Kategorie: "",
         titel: "",
@@ -32,7 +31,8 @@ const Event = () => {
     const handelSubmit = (e) => {
         e.preventDefault();
         console.log("Form submitted:", inputValue);
-    }
+        setInputValue(initialValues);
+    };
 
     return (
         <>
@@ -77,7 +77,7 @@ const Event = () => {
                     </div>
 
                     <form className='mt-5' onSubmit={handelSubmit}>
-                        <div className="flex max-w-[763px] border-[0.5px] w-full border-[#D1E0E9] rounded-[30px] px-4 bg-white mb-5 py-[15.5px] relative">
+                        <div className="flex max-w-[763px] border-[0.5px] w-full border-[#D1E0E9] rounded-[30px] px-4 bg-white mb-5 py-[16.5px] relative">
                             <select
                                 value={inputValue.Kategorie}
                                 name="kategorie"
