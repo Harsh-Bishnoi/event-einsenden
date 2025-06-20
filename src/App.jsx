@@ -1,10 +1,11 @@
 import './App.css'
+import Event from './components/Event'
 
 function App() {
 
   return (
     <>
-
+      <Event />
     </>
   )
 }
