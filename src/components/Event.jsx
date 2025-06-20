@@ -1,15 +1,22 @@
-import React, { useState } from 'react'
+import React, { useState } from "react";
 import CustomInput from './common/CustomInput'
 import { ArrowIcon } from '../utils/Icons'
 
 const Event = () => {
-    const [ImgPreview, setImgPreview] = useState([]);
+    const [imgPreview, setImgPreview] = useState([]);
 
     const handleFileChange = (e) => {
         const files = Array.from(e.target.files);
-        const objectUrls = files.map(file => URL.createObjectURL(file));
-        setImgPreview(prev => [...prev, ...objectUrls]);
+        const objectUrls = files.map((file) => URL.createObjectURL(file));
+        setImgPreview((prev) => [...prev, ...objectUrls]);
     };
+
+    const removeImage = (i) => {
+        const updated = [...imgPreview];
+        updated.splice(i, 1);
+        setImgPreview(updated);
+    };
+
 
     const initialValues = {
         Kategorie: "",
@@ -33,16 +40,42 @@ const Event = () => {
                 <div className="max-w-[768px] mx-auto">
                     <h1 className='ff-open font-bold text-4xl leading-11 text-center text-[#222222] tracking-[-0.32px] pb-5'>Event einsenden</h1>
                     <p className='ff-open text-center font-light text-[20px] text-[#737376] leading-7.5 pb-5'>At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
-                    <div className="w-full mx-auto max-w-[360px] sm:max-w-[620px] md:max-w-[763px] px-2 py-4 bg-white border border-dashed border-[#D1E0E9] rounded-[30px]">
-                        <input className='file:border file:border-[#D4D4D4] file:border-dashed file:max-w-[96px] file:w-full file:min-h-[80px] file:bg-white file:rounded-[20px]' type="file" accept='image/*' onChange={handleFileChange} multiple />
-                        {ImgPreview.length > 0 && (
-                            <div className='gap-4 flex overflow-x-scroll'>
-                                {ImgPreview.map((imgSrc, index) => (
-                                    <img key={index} src={imgSrc} alt={`Preview ${index}`} className='max-w-[96px] max-h-[96px] w-full h-full rounded-[20px]' />
-                                ))}
-                            </div>
-                        )}
+                    <div className="w-full max-w-[763px] px-4 py-2 bg-white border-2 border-dashed border-[#D1E0E9] rounded-[30px]">
+                        <input
+                            id="fileUpload"
+                            type="file"
+                            accept="image/*"
+                            onChange={handleFileChange}
+                            multiple
+                            className="hidden"
+                        />
+
+                        <div className="gap-4 flex overflow-x-auto items-center">
+                            {imgPreview.map((src, i) => (
+                                <div key={i} className="relative w-[96px] h-[96px]">
+                                    <img
+                                        src={src}
+                                        className="w-full h-full rounded-[20px] object-cover"
+                                    />
+                                    <button
+                                        onClick={() => removeImage(i)}
+                                        className="absolute top-0 right-0 bg-red-500 cursor-pointer text-white rounded-full w-4 h-4 flex items-center justify-center text-sm hover:bg-red-600"
+                                        title="Remove image"
+                                    >
+                                        ×
+                                    </button>
+                                </div>
+                            ))}
+
+                            <label
+                                htmlFor="fileUpload"
+                                className="min-w-[96px] outline-0 h-[80px] min-h-[80px] rounded-[20px] border-2 border-dashed border-[#D4D4D4] flex items-center justify-center text-3xl text-[#007AFF] cursor-pointer font-bold hover:bg-[#f0f8ff] transition-all"
+                            >
+                                +
+                            </label>
+                        </div>
                     </div>
+
                     <form className='mt-5' onSubmit={handelSubmit}>
                         <div className="flex max-w-[763px] border-[0.5px] w-full border-[#D1E0E9] rounded-[30px] px-4 bg-white mb-5 py-[15.5px] relative">
                             <select
