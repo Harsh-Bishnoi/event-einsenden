@@ -36,7 +36,7 @@ const Event = () => {
 
     return (
         <>
-            <div className="flex justify-center items-center px-3 py-15">
+            <div className="flex justify-center items-center px-3 py-10 sm:py-15">
                 <div className="max-w-[768px] mx-auto">
                     <h1 className='ff-open font-bold text-4xl leading-11 text-center text-[#222222] tracking-[-0.32px] pb-5'>Event einsenden</h1>
                     <p className='ff-open text-center font-light text-[20px] text-[#737376] leading-7.5 pb-5'>At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
