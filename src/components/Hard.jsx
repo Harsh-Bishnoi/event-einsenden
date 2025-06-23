@@ -34,7 +34,7 @@ const Hard = () => {
     }
 
     return (
-        <div className="flex justify-center items-center py-24.5 px-3">
+        <div className="flex justify-center items-center py-10 md:py-15 lg:py-24.5 px-3">
             <div className="max-w-[1140px] mx-auto w-full">
                 <div className="w-full overflow-x-auto max-w-[1059px]">
                     <div className="flex gap-[5px] whitespace-nowrap items-center">
